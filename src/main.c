@@ -5,7 +5,7 @@
  *    using neslib
  *    by Doug Fraker in 2018
  */
-/*    Reminders
+/*    TODO
  *    -done- clear boats x, y and orient for player 2.
  *    let the players replay.
  */
@@ -99,7 +99,8 @@ int main(void) {
                 boats_x[shipnum-1]--;
             }
             ppu_on_all(); /* turn on screen. */
-            drawships(10, 4, boats_x, boats_y, boats_orient, (unsigned char *)boats_sizes, shipnum, player_a.boats);
+            drawships(10, 4, boats_x, boats_y, boats_orient,
+                      (unsigned char*)boats_sizes, shipnum, player_a.boats);
             ppu_on_all(); /* turn on screen. */
         }else if(game==8){
             if(shoot_x>0){
@@ -117,12 +118,15 @@ int main(void) {
                         boats_x[shipnum-1]++;
                     }
                 }else{
-                    if(boats_x[shipnum-1]<10-(unsigned char) boats_sizes[shipnum-1]){
+                    if(boats_x[shipnum-1]<10-
+                       (unsigned char)boats_sizes[shipnum-1]){
                         boats_x[shipnum-1]++;
                     }
                 }
                 ppu_on_all(); /* turn on screen. */
-                drawships(10, 4, boats_x, boats_y, boats_orient, (unsigned char *)boats_sizes, shipnum, player_a.boats);
+                drawships(10, 4, boats_x, boats_y, boats_orient,
+                          (unsigned char*)boats_sizes, shipnum,
+                          player_a.boats);
                 ppu_on_all(); /* turn on screen. */
             }else if(game==8){
                 if(shoot_x<9){
@@ -139,7 +143,9 @@ int main(void) {
                     boats_y[shipnum-1]--;
                 }
                 ppu_on_all(); /* turn on screen. */
-                drawships(10, 4, boats_x, boats_y, boats_orient, (unsigned char *)boats_sizes, shipnum, player_a.boats);
+                drawships(10, 4, boats_x, boats_y, boats_orient,
+                          (unsigned char*)boats_sizes, shipnum,
+                          player_a.boats);
                 ppu_on_all(); /* turn on screen. */
             }else if(game==8){
                 if(shoot_y>0){
@@ -153,7 +159,8 @@ int main(void) {
         if(button&PAD_DOWN){
             if(game==2){
                 if(boats_orient[shipnum-1]==0){
-                    if(boats_y[shipnum-1]<10-(unsigned char) boats_sizes[shipnum-1]){
+                    if(boats_y[shipnum-1]<10-
+                       (unsigned char)boats_sizes[shipnum-1]){
                         boats_y[shipnum-1]++;
                     }
                 }else{
@@ -162,7 +169,9 @@ int main(void) {
                     }
                 }
                 ppu_on_all(); /* turn on screen. */
-                drawships(10, 4, boats_x, boats_y, boats_orient, (unsigned char *)boats_sizes, shipnum, player_a.boats);
+                drawships(10, 4, boats_x, boats_y, boats_orient,
+                          (unsigned char*)boats_sizes, shipnum,
+                          player_a.boats);
                 ppu_on_all(); /* turn on screen. */
             }else if(game==8){
                 if(shoot_y<9){
@@ -287,7 +296,8 @@ int main(void) {
                     draw_vram2(2-1, 9-1);
                     clearscreen();
                     write(1, 1, (unsigned char*) "LE JOUEUR 1 A GAGNE !!!");
-                    write(1, 3, (unsigned char*) "Pressez [Start] pour rejouer.");
+                    write(1, 3,
+                          (unsigned char*) "Pressez [Start] pour rejouer.");
                     write(9, 5, (unsigned char*) "--- Bateaux ---");
                     write(1, 7, (unsigned char*) "--- Joueur 1 ---");
                     write(15, 7, (unsigned char*) "--- Joueur 2 ---");
@@ -297,10 +307,12 @@ int main(void) {
                     i=0;
                     clearscreen();
                     write(1, 1, (unsigned char*) "Joueur 1, ne regardez pas.");
-                    write(1, 2, (unsigned char*) "Joueur 2, appuyez sur A pour");
+                    write(1, 2,
+                          (unsigned char*) "Joueur 2, appuyez sur A pour");
                     write(1, 3, (unsigned char*) "finir le tour.");
                     if(player_a.hits[shoot_y*10+shoot_x]==1){
-                        write(1, 4, (unsigned char*) "Joueur 1 a rate son tir.");
+                        write(1, 4,
+                              (unsigned char*) "Joueur 1 a rate son tir.");
                     }else if(player_a.hits[shoot_y*10+shoot_x]==3){
                         write(1, 4, (unsigned char*) "Joueur 1 a touche.");
                     }
@@ -344,7 +356,8 @@ int main(void) {
                     y=boats_y[b];
                     orient=boats_orient[b];
                     length=boats_sizes[b];
-                    /* Another copy/paste of the code of shiponmap :-D, to check if all boats have their cells. */
+                    /* Another copy/paste of the code of shiponmap :-D, to
+                     * check if all boats have their cells. */
                     ppu_off(); /* screen off. */
                     i=0;
                     while(i!=length){
@@ -354,7 +367,8 @@ int main(void) {
                             }else{
                                 clearline(1);
                                 clearline(29);
-                                write(5, 1, (unsigned char*) "Des bateaux se recouvrent.");
+                                write(5, 1, (unsigned char*)
+                                      "Des bateaux se recouvrent.");
                                 check=0;
                                 break;
                             }
@@ -364,7 +378,8 @@ int main(void) {
                             }else{
                                 clearline(1);
                                 clearline(29);
-                                write(1, 1, (unsigned char*) "Des bateaux se recouvrent.");
+                                write(1, 1, (unsigned char*)
+                                            "Des bateaux se recouvrent.");
                                 check=0;
                                 break;
                             }
@@ -407,7 +422,9 @@ int main(void) {
                 ppu_off(); /* screen off. */
                 displayship(5, 25, shipnames, shipnum);
                 ppu_on_all();
-                drawships(10, 4, boats_x, boats_y, boats_orient, (unsigned char *)boats_sizes, shipnum, player_a.boats);
+                drawships(10, 4, boats_x, boats_y, boats_orient,
+                          (unsigned char *)boats_sizes, shipnum,
+                          player_a.boats);
                 ppu_on_all(); /* turn on screen. */
             }
         }

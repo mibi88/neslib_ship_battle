@@ -12,7 +12,7 @@ void write(uint8 x, uint8 y, uint8* text) {
     }
 }
 
-void putc(uint8 x, uint8 y, uint8 c) {
+void writec(uint8 x, uint8 y, uint8 c) {
     vram_adr(NTADR_A(x, y));
     vram_put(c);
 }
